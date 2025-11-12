@@ -8,7 +8,7 @@ Live Demo: [https://your-liquid-effect.vercel.app](https://your-liquid-effect.ve
 
 ## 🎬 Preview
 
-![Liquid ripple animation](public/preview.jpg)  
+![Liquid ripple animation](public/preview.png)  
 *Hover to see the magic — fluid distortion in real time*
 
 ---
