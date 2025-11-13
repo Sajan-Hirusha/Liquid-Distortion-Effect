@@ -8,7 +8,7 @@ import {
   renderFragmentShader,
 } from "./shaders/shaders";
 
-export default function WaterDistortion() {
+export default function RealWaterDistortion() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
