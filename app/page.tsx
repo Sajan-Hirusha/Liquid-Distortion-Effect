@@ -1,4 +1,4 @@
-import DistortedWaterEffect from "./components/Distorted_Water_Effect/DistortedWaterEffect";
+import DistortedWaterEffect from "@/app/components/distorted_water_effect/DistortedWaterEffect";
 
 export default function Home() {
   return (

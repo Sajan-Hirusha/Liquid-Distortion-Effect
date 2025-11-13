@@ -6,7 +6,7 @@ import {
   simulationFragmentsShader,
   renderVertexShader,
   renderFragmentShader,
-} from "./shaders";
+} from "./shaders/shaders";
 
 export default function WaterDistortion() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
