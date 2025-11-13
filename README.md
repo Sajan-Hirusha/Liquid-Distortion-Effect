@@ -2,14 +2,14 @@
 
 A stunning, real-time **liquid distortion shader** built with **Next.js**, **TypeScript**, and **WebGL**. Watch images ripple and flow like water under your cursor — fully interactive and buttery smooth.
 
-Live Demo: [https://your-liquid-effect.vercel.app](https://your-liquid-effect.vercel.app) *(replace with your actual URL)*
+Live Demo: [https://your-liquid-effect.vercel.app](https://your-liquid-effect.vercel.app) _(replace with your actual URL)_
 
 ---
 
 ## 🎬 Preview
 
 ![Liquid ripple animation](public/preview.png)  
-*Hover to see the magic — fluid distortion in real time*
+_Hover to see the magic — fluid distortion in real time_
 
 ---
 
@@ -38,3 +38,4 @@ git clone https://github.com/Sajan-Hirusha/Liquid-Distortion-Effect.git
 cd your-liquid-distortion
 npm install
 npm run dev
+```

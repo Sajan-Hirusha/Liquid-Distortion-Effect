@@ -8,7 +8,6 @@ import {
   renderFragmentShader,
 } from "./shaders";
 
-
 export default function WaterDistortion() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -23,21 +22,27 @@ export default function WaterDistortion() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(
-      -1, 1, 1, -1, 0, 1
-    );
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
     const resolution = new THREE.Vector2(window.innerWidth, window.innerHeight);
 
     // --- TEXTURE TARGETS (ping-pong buffers) ---
-    let renderTargetA = new THREE.WebGLRenderTarget(resolution.x, resolution.y, {
-      type: THREE.FloatType,
-      format: THREE.RGBAFormat,
-    });
-    let renderTargetB = new THREE.WebGLRenderTarget(resolution.x, resolution.y, {
-      type: THREE.FloatType,
-      format: THREE.RGBAFormat,
-    });
+    let renderTargetA = new THREE.WebGLRenderTarget(
+      resolution.x,
+      resolution.y,
+      {
+        type: THREE.FloatType,
+        format: THREE.RGBAFormat,
+      },
+    );
+    let renderTargetB = new THREE.WebGLRenderTarget(
+      resolution.x,
+      resolution.y,
+      {
+        type: THREE.FloatType,
+        format: THREE.RGBAFormat,
+      },
+    );
 
     // --- SIMULATION MATERIAL ---
     const simUniforms = {
@@ -56,7 +61,7 @@ export default function WaterDistortion() {
 
     const simulationPlane = new THREE.Mesh(
       new THREE.PlaneGeometry(2, 2),
-      simulationMaterial
+      simulationMaterial,
     );
 
     const simulationScene = new THREE.Scene();
@@ -64,9 +69,7 @@ export default function WaterDistortion() {
 
     // --- RENDER MATERIAL ---
     const textureLoader = new THREE.TextureLoader();
-    const imageTexture = textureLoader.load(
-      "/image.jpg"
-    );
+    const imageTexture = textureLoader.load("/image.jpg");
 
     const renderUniforms = {
       textureA: { value: renderTargetA.texture },
@@ -79,7 +82,10 @@ export default function WaterDistortion() {
       fragmentShader: renderFragmentShader,
     });
 
-    const renderPlane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), renderMaterial);
+    const renderPlane = new THREE.Mesh(
+      new THREE.PlaneGeometry(2, 2),
+      renderMaterial,
+    );
     scene.add(renderPlane);
 
     // --- MOUSE INTERACTION ---

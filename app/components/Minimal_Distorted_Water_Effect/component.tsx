@@ -15,7 +15,7 @@ export default function WaterDistortion() {
 
   useEffect(() => {
     if (!canvasRef.current) return;
-    
+
     const renderer = new Renderer({ canvas: canvasRef.current });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 1);
@@ -109,7 +109,9 @@ export default function WaterDistortion() {
       `,
       uniforms: {
         tWater: { value: simA.texture },
-        uResolution: { value: new Float32Array([window.innerWidth, window.innerHeight]) },
+        uResolution: {
+          value: new Float32Array([window.innerWidth, window.innerHeight]),
+        },
         uFrame: { value: 0 },
         uMouse: { value: new Float32Array([0, 0, 0, 0]) }, // currX, currY, prevX, prevY
       },
@@ -150,21 +152,38 @@ export default function WaterDistortion() {
         uniforms: {
           tWater: { value: simA.texture },
           tImage: { value: texture },
-          uResolution: { value: new Float32Array([window.innerWidth, window.innerHeight]) },
+          uResolution: {
+            value: new Float32Array([window.innerWidth, window.innerHeight]),
+          },
         },
       });
 
       const simMesh = new Mesh(gl, { geometry: triangle, program: simProgram });
-      const renderMesh = new Mesh(gl, { geometry: triangle, program: renderProgram });
+      const renderMesh = new Mesh(gl, {
+        geometry: triangle,
+        program: renderProgram,
+      });
 
       // Resize handler
       const handleResize = () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
-        simProgram.uniforms.uResolution.value = new Float32Array([window.innerWidth, window.innerHeight]);
-        renderProgram.uniforms.uResolution.value = new Float32Array([window.innerWidth, window.innerHeight]);
+        simProgram.uniforms.uResolution.value = new Float32Array([
+          window.innerWidth,
+          window.innerHeight,
+        ]);
+        renderProgram.uniforms.uResolution.value = new Float32Array([
+          window.innerWidth,
+          window.innerHeight,
+        ]);
         // Recreate render targets with new size
-        simA = new RenderTarget(gl, { width: window.innerWidth, height: window.innerHeight });
-        simB = new RenderTarget(gl, { width: window.innerWidth, height: window.innerHeight });
+        simA = new RenderTarget(gl, {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+        simB = new RenderTarget(gl, {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
         simProgram.uniforms.tWater.value = simA.texture; // Update the texture reference
       };
       window.addEventListener("resize", handleResize);
@@ -177,7 +196,12 @@ export default function WaterDistortion() {
         // Convert mouse coordinates to UV space (0-1)
         mouse.x = e.clientX / window.innerWidth;
         mouse.y = 1 - e.clientY / window.innerHeight; // Invert Y for WebGL
-        simProgram.uniforms.uMouse.value = new Float32Array([mouse.x, mouse.y, mouse.prevX, mouse.prevY]);
+        simProgram.uniforms.uMouse.value = new Float32Array([
+          mouse.x,
+          mouse.y,
+          mouse.prevX,
+          mouse.prevY,
+        ]);
       };
 
       canvasRef.current?.addEventListener("mousemove", handleMouseMove);

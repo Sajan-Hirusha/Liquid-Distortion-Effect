@@ -5,9 +5,9 @@ void main() {
     vUv = uv;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0) ;
 }
-`
+`;
 
-export const simulationFragmentsShader =`
+export const simulationFragmentsShader = `
 
 uniform sampler2D textureA;
 uniform vec2 mouse;
