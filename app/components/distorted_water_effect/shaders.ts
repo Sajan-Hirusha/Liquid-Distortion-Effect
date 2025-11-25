@@ -3,8 +3,7 @@ varying vec2 vUv;
 void main() {
   vUv = uv;
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-}
-`;
+}`;
 
 export const simulationFragmentsShader = `
 uniform sampler2D textureA;
@@ -22,7 +21,7 @@ void main() {
     return;
   }
 
-  // 🔸 Slower wave evolution
+  // Slower wave evolution
   float t = time * 0.25;  // 4x slower ripple updates
 
   vec4 data = texture2D(textureA, uv);
@@ -84,10 +83,10 @@ varying vec2 vUv;
 void main() {
   vec4 data = texture2D(textureA, vUv);
 
-  // 🔸 Slower temporal movement
+  //Slower temporal movement
   float t = time * 0.25; // slow breathing speed
 
-  // 🔸 Increased distortion for heavier liquid feel
+  //Increased distortion for heavier liquid feel
   vec2 distortion = 0.22 * data.zw; // was 0.12 → stronger depth bend
   distortion *= smoothstep(0.1, 0.9, vUv.y);
 
@@ -99,7 +98,7 @@ void main() {
 
   vec4 color = texture2D(textureB, vUv + distortion);
 
-  // 🔸 Enhance lighting realism
+  // Enhance lighting realism
   vec3 normal = normalize(vec3(-data.z * 2.0, 0.6, -data.w * 2.0));
   vec3 lightDir = normalize(vec3(-3.0, 10.0, 3.0));
 
@@ -107,11 +106,11 @@ void main() {
   float specular = pow(max(0.0, dot(normal, lightDir)), 50.0) * 1.0;
   color.rgb += vec3(0.9, 0.92, 0.95) * specular;
 
-  // 🔸 Depth & tone balance
+  // Depth & tone balance
   float depth = smoothstep(0.0, 1.0, vUv.y);
   color.rgb *= mix(1.05, 0.92, depth);
 
-  // 🔸 Subtle shimmer to make it alive, slower now
+  // Subtle shimmer to make it alive, slower now
   color.rgb *= 1.0 + 0.03 * sin(vUv.y * 3.0 + t * 0.5);
 
   gl_FragColor = color;
